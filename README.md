@@ -238,9 +238,9 @@ Langkah:
 
 ## 🧑‍💻 Author
 
-**Helmi Assura**  
+**M Helmi Assura**  
 Rakamin x Evermos Virtual Internship 2025  
-📧 Email: helmi.assura@gmail.com  
+📧 Email: lerkud600@gmail.com  
 🔗 GitHub: [helmiassura](https://github.com/helmiassura)
 
 ---
