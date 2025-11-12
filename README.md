@@ -17,7 +17,7 @@ _Backend Developer Program 2025_
 
 👨‍💻 **Dibuat oleh:** M Helmi Assura
 
-📘 [Tentang Proyek](#📌-tentang-proyek) 🧩 [API Documentation](#🧭-dokumentasi-api) 🚀 [Quick Start](#🚀-instalasi--setup)
+📘 [Tentang Proyek](#tentang-proyek) 🧩 [API Documentation](#🧭-dokumentasi-api) 🚀 [Quick Start](#🚀-instalasi--setup)
 
 </div>
 
