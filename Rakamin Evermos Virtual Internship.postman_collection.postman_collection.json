@@ -1,0 +1,857 @@
+{
+	"info": {
+		"_postman_id": "48697d93-d1c8-44c9-b57d-64c328dee8a6",
+		"name": "Rakamin Evermos Virtual Internship.postman_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44862706",
+		"_collection_link": "https://bhakskuy.postman.co/workspace/Bhakskuy's-Workspace~5a788679-84b9-4d08-8044-d144c1a87542/collection/44862706-48697d93-d1c8-44c9-b57d-64c328dee8a6?action=share&source=collection_link&creator=44862706"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nama\": \"Helmi Assura\",\n  \"kata_sandi\": \"123456\",\n  \"no_telp\": \"081282273092\",\n  \"tanggal_Lahir\": \"1995-08-20\",\n  \"jenis_kelamin\": \"Laki-laki\",\n  \"tentang\": \"Penjual tas lokal.\",\n  \"pekerjaan\": \"Web Developer\",\n  \"email\": \"helmi@gmail.com\",\n  \"id_provinsi\": \"32\",\n  \"id_kota\": \"3201\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login (save token)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"try {",
+									"  var res = pm.response.json();",
+									"  if (res && res.data && res.data.token) {",
+									"    pm.environment.set('token', res.data.token);",
+									"    console.log('Saved token to environment variable token');",
+									"  } else {",
+									"    console.log('No token found in login response');",
+									"  }",
+									"} catch (e) { console.log('Login test error', e); }"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"no_telp\": \"081282273092\",\n  \"kata_sandi\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Alamat",
+					"item": [
+						{
+							"name": "Get All Alamat",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/user/alamat",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"alamat"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Alamat By ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/user/alamat/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"alamat",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Alamat",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"judul_alamat\": \"Rumah\",\n  \"nama_penerima\": \"Helmi Assura\",\n  \"no_telp\": \"081282273092\",\n  \"detail_alamat\": \"Jl. Melati No.10\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/user/alamat",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"alamat"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Alamat",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"judul_alamat\": \"Rumah Updated\",\n  \"nama_penerima\": \"Helmi\",\n  \"no_telp\": \"081282273092\",\n  \"detail_alamat\": \"Jl. Melati No.10 A\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/user/alamat/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"alamat",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Alamat",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/user/alamat/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"alamat",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get My Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nama\": \"Helmi Updated\",\n  \"pekerjaan\": \"Senior WebDe\",\n  \"tentang\": \"Update bio\",\n  \"tanggal_Lahir\": \"1995-08-20\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get All Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/category",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/category/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category (admin)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"nama_category\": \"Tas Mewah\" }"
+						},
+						"url": {
+							"raw": "{{base_url}}/category",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category (admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"nama_category\": \"Makanan\" }"
+						},
+						"url": {
+							"raw": "{{base_url}}/category/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category (admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/category/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Toko",
+			"item": [
+				{
+					"name": "Get All Toko",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/toko",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"toko"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Toko By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/toko/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"toko",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Toko",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/toko/my",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"toko",
+								"my"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Toko",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_toko",
+									"value": "Toko Helmi",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/toko/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"toko",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get All Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/product",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/product/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product (multipart)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_produk",
+									"value": "Tas Kulit Asli",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "harga_reseller",
+									"value": "120000",
+									"type": "text"
+								},
+								{
+									"key": "harga_konsumen",
+									"value": "150000",
+									"type": "text"
+								},
+								{
+									"key": "stok",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "deskripsi",
+									"value": "Tas kulit handmade",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/product",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_produk",
+									"value": "Tas Kulit Updated",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "harga_reseller",
+									"value": "130000",
+									"type": "text"
+								},
+								{
+									"key": "harga_konsumen",
+									"value": "160000",
+									"type": "text"
+								},
+								{
+									"key": "stok",
+									"value": "8",
+									"type": "text"
+								},
+								{
+									"key": "deskripsi",
+									"value": "Deskripsi baru",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/product/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/product/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaksi (Trx)",
+			"item": [
+				{
+					"name": "Create Trx",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"method_bayar\": \"transfer\",\n  \"alamat_kirim\": 1,\n  \"detail_trx\": [ { \"product_id\": 1, \"kuantitas\": 1 } ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/trx",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trx"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Trx",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/trx",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trx"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Trx By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/trx/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trx",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ProvCity",
+			"item": [
+				{
+					"name": "List Provinces",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/provcity/listprovinces",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"provcity",
+								"listprovinces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Cities by Province",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/provcity/listcities/32",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"provcity",
+								"listcities",
+								"32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail Province",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/provcity/detailprovince/32",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"provcity",
+								"detailprovince",
+								"32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail City",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/provcity/detailcity/3216",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"provcity",
+								"detailcity",
+								"3216"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url_root",
+			"value": "http://127.0.0.1:8000"
+		},
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000/api/v1"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
