@@ -167,9 +167,13 @@ Response:
 | Method | Endpoint | Deskripsi |
 |--------|-----------|-----------|
 | GET | `/api/v1/provcity/listprovinces` | List semua provinsi |
-| GET | `/api/v1/provcity/listcities/:prov_id` | List kota berdasarkan provinsi |
-| GET | `/api/v1/provcity/detailprovince/:prov_id` | Detail provinsi |
-| GET | `/api/v1/provcity/detailcity/:city_id` | Detail kota |
+| GET | `/api/v1/provcity/detailprovince/:prov_id` | Detail provinsi berdasarkan ID |
+| GET | `/api/v1/provcity/listcities/:prov_id` | List semua kota berdasarkan ID provinsi |
+| GET | `/api/v1/provcity/detailcity/:city_id` | Detail kota berdasarkan ID |
+| GET | `/api/v1/provcity/listdistricts/:city_id` | List semua kecamatan berdasarkan ID kota |
+| GET | `/api/v1/provcity/detaildistrict/:district_id` | Detail kecamatan berdasarkan ID |
+| GET | `/api/v1/provcity/listvillages/:district_id` | List semua desa/kelurahan berdasarkan ID kecamatan |
+| GET | `/api/v1/provcity/detailvillage/:village_id` | Detail desa/kelurahan berdasarkan ID |
 
 ---
 
