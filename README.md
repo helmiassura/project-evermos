@@ -73,7 +73,7 @@ cd evermos-project
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
-DB_PASS=
+DB_PASSWORD=
 DB_NAME=evermos_db
 JWT_SECRET=your-secret-key-change-this-in-production
 PORT=8000
