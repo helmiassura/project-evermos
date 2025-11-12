@@ -143,7 +143,7 @@ Response:
 |--------|-----------|-----------|
 | GET | `/api/v1/product` | Get semua produk (pagination + filter) |
 | GET | `/api/v1/product/:id` | Get produk by ID |
-| POST | `/api/v1/product` | Tambah produk (upload foto) |
+| POST | `/api/v1/product` | Tambah produk (upload foto dengan key `photos`) |
 | PUT | `/api/v1/product/:id` | Update produk |
 | DELETE | `/api/v1/product/:id` | Hapus produk |
 
