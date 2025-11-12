@@ -204,7 +204,7 @@ evermos-project/
 │   ├── response.go
 │   ├── slug.go
 │   └── file.go
-├── uploads/                            # Directory untuk uploaded files
+├── uploads/                            # Directory for uploaded files
 ├── main.go                             # Application entry point
 ├── go.mod                              # Go module definition
 ├── go.sum                              # Dependency checksum file
