@@ -75,7 +75,7 @@ DB_PORT=3306
 DB_USER=root
 DB_PASS=
 DB_NAME=evermos_db
-JWT_SECRET=secret123
+JWT_SECRET=your-secret-key-change-this-in-production
 PORT=8000
 ```
 
