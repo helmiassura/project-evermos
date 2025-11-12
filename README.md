@@ -1,22 +1,25 @@
 # 🛍️ Evermos Mini Project - Backend Golang
+<div align="center">
 
 [![Go](https://img.shields.io/badge/Go-1.21+-00ADD8?logo=go&logoColor=white)]()
 [![Fiber](https://img.shields.io/badge/Fiber-Framework-2C8EBB?logo=fiber&logoColor=white)]()
 [![MySQL](https://img.shields.io/badge/MySQL-Database-00758F?logo=mysql&logoColor=white)]()
 [![JWT](https://img.shields.io/badge/Auth-JWT-000000?logo=jsonwebtokens&logoColor=white)]()
 
-> RESTful API E-Commerce Backend  
-> Dibangun dengan **Golang**, **Fiber Framework**, **GORM ORM**, dan **MySQL**
+### RESTful API E-Commerce Backend  
+Dibangun dengan **Golang**, **Fiber Framework**, **GORM ORM**, dan **MySQL**
 
 ---
 
-### 🎓 Proyek Akhir Virtual Internship  
+🎓 **Proyek Akhir Virtual Internship**  
 **Rakamin Academy x Evermos**  
-Backend Developer Program 2025  
+_Backend Developer Program 2025_
 
-👨‍💻 Dibuat oleh: **Helmi Assura**  
+👨‍💻 **Dibuat oleh:** M Helmi Assura
 
 📘 [Demo](#) 🧩 [Dokumentasi](#dokumentasi-api) 🚀 [Quick Start](#-instalasi--setup)
+
+</div>
 
 ---
 
@@ -174,9 +177,9 @@ Response:
 
 ```
 evermos-project/
-├── config/              # Database configuration
-│   └── database.go      # GORM initialization & migration
-├── controllers/         # Business logic & request handlers
+├── config/                             # Database configuration
+│   └── database.go                     # GORM initialization & migration
+├── controllers/                        # Business logic & request handlers
 │   ├── auth_controller.go
 │   ├── user_controller.go
 │   ├── alamat_controller.go
@@ -185,23 +188,25 @@ evermos-project/
 │   ├── toko_controller.go
 │   ├── trx_controller.go
 │   └── provcity_controller.go
-├── middleware/          # Authentication & authorization
+├── middleware/                         # Authentication & authorization
 │   └── auth.go
-├── models/              # Data structures & ORM models
+├── models/                             # Data structures & ORM models
 │   └── models.go
-├── routes/              # API route definitions
+├── routes/                             # API route definitions
 │   └── routes.go
-├── utils/               # Helper functions
+├── utils/                              # Helper functions
 │   ├── jwt.go
 │   ├── password.go
 │   ├── response.go
 │   ├── slug.go
 │   └── file.go
-├── uploads/             # Directory untuk uploaded files
-├── main.go              # Application entry point
-├── go.mod               # Go module definition
-├── .env                 # Environment variables
-└── README.md
+├── uploads/                            # Directory untuk uploaded files
+├── main.go                             # Application entry point
+├── go.mod                              # Go module definition
+├── go.sum                              # Dependency checksum file
+├── Rakamin Evermos.....collection.json # Postman API Collection
+├── .env                                # Environment variables
+└── README.md                           # Project documentation
 ```
 
 ---
