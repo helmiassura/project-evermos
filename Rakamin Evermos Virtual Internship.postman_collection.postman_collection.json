@@ -760,78 +760,156 @@
 			]
 		},
 		{
-			"name": "ProvCity",
+			"name": "Province City",
 			"item": [
 				{
-					"name": "List Provinces",
+					"name": "Get List Provinces",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
 							"raw": "{{base_url}}/provcity/listprovinces",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"provcity",
-								"listprovinces"
+							"host": ["{{base_url}}"],
+							"path": ["provcity", "listprovinces"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Cities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/provcity/listcities/:prov_id",
+							"host": ["{{base_url}}"],
+							"path": ["provcity", "listcities", ":prov_id"],
+							"variable": [
+								{
+									"key": "prov_id",
+									"value": "32",
+									"description": "ID Provinsi (contoh: 32 = Jawa Barat)"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "List Cities by Province",
+					"name": "Get List Districts",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/provcity/listcities/32",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"provcity",
-								"listcities",
-								"32"
+							"raw": "{{base_url}}/provcity/listdistricts/:city_id",
+							"host": ["{{base_url}}"],
+							"path": ["provcity", "listdistricts", ":city_id"],
+							"variable": [
+								{
+									"key": "city_id",
+									"value": "3216",
+									"description": "ID Kota/Kabupaten (contoh: 3216 = Kabupaten Bekasi)"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Detail Province",
+					"name": "Get List Villages",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/provcity/detailprovince/32",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"provcity",
-								"detailprovince",
-								"32"
+							"raw": "{{base_url}}/provcity/listvillages/:district_id",
+							"host": ["{{base_url}}"],
+							"path": ["provcity", "listvillages", ":district_id"],
+							"variable": [
+								{
+									"key": "district_id",
+									"value": "3216081",
+									"description": "ID Kecamatan (contoh: 3216081 = Tambun Selatan)"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Detail City",
+					"name": "Get Detail Province",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/provcity/detailcity/3216",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"provcity",
-								"detailcity",
-								"3216"
+							"raw": "{{base_url}}/provcity/detailprovince/:prov_id",
+							"host": ["{{base_url}}"],
+							"path": ["provcity", "detailprovince", ":prov_id"],
+							"variable": [
+								{
+									"key": "prov_id",
+									"value": "32",
+									"description": "ID Provinsi"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail City",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/provcity/detailcity/:city_id",
+							"host": ["{{base_url}}"],
+							"path": ["provcity", "detailcity", ":city_id"],
+							"variable": [
+								{
+									"key": "city_id",
+									"value": "3216",
+									"description": "ID Kota/Kabupaten"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail District",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/provcity/detaildistrict/:district_id",
+							"host": ["{{base_url}}"],
+							"path": ["provcity", "detaildistrict", ":district_id"],
+							"variable": [
+								{
+									"key": "district_id",
+									"value": "3216081",
+									"description": "ID Kecamatan"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail Village",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/provcity/detailvillage/:village_id",
+							"host": ["{{base_url}}"],
+							"path": ["provcity", "detailvillage", ":village_id"],
+							"variable": [
+								{
+									"key": "village_id",
+									"value": "3216081007",
+									"description": "ID Kelurahan/Desa"
+								}
 							]
 						}
 					},

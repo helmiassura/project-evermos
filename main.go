@@ -39,7 +39,6 @@ func main() {
 			if e, ok := err.(*fiber.Error); ok {
 				code = e.Code
 			}
-			// don't leak internals in production — here we keep the original behavior
 			return c.Status(code).JSON(fiber.Map{
 				"status":  false,
 				"message": "Internal Server Error",

@@ -21,10 +21,9 @@ func NewTokoController(db *gorm.DB) *TokoController {
 }
 
 // ===========================
-// ✅ GET MY TOKO (debug + robust)
+// GET MY TOKO (debug + robust)
 // ===========================
 func (tc *TokoController) GetMyToko(c *fiber.Ctx) error {
-	// Debug: show Authorization header and common locals keys
 	auth := string(c.Request().Header.Peek("Authorization"))
 	fmt.Printf("[DEBUG] Authorization header: %s\n", auth)
 	fmt.Printf("[DEBUG] c.Locals(\"userID\"): %#v\n", c.Locals("userID"))
@@ -32,10 +31,8 @@ func (tc *TokoController) GetMyToko(c *fiber.Ctx) error {
 	fmt.Printf("[DEBUG] c.Locals(\"id\"): %#v\n", c.Locals("id"))
 	fmt.Printf("[DEBUG] c.Locals(middleware.UserIDKey): %#v\n", c.Locals(middleware.UserIDKey))
 
-	// Resolve userID from middleware.UserIDKey first, then fallbacks
 	var userIDUint uint
 
-	// try middleware.UserIDKey
 	if v := c.Locals(middleware.UserIDKey); v != nil {
 		switch val := v.(type) {
 		case uint:
@@ -55,7 +52,6 @@ func (tc *TokoController) GetMyToko(c *fiber.Ctx) error {
 		}
 	}
 
-	// fallback to other common keys
 	if userIDUint == 0 {
 		if v := c.Locals("userID"); v != nil {
 			switch val := v.(type) {
@@ -123,7 +119,6 @@ func (tc *TokoController) GetMyToko(c *fiber.Ctx) error {
 		return utils.RespondJSON(c, fiber.StatusUnauthorized, false, "Failed to GET data", []string{"Unauthorized or userID not found in context"}, nil)
 	}
 
-	// Query by id_user (not primary key)
 	var toko models.Toko
 	if err := tc.DB.Where("id_user = ?", userIDUint).First(&toko).Error; err != nil {
 		fmt.Printf("[DEBUG] db query error: %v\n", err)
@@ -137,7 +132,6 @@ func (tc *TokoController) GetMyToko(c *fiber.Ctx) error {
 // UPDATE TOKO (type-safe userID)
 // ===========================
 func (tc *TokoController) UpdateToko(c *fiber.Ctx) error {
-	// get userID safely (compatible with middleware)
 	rawID := c.Locals(middleware.UserIDKey)
 	var userID uint
 	switch v := rawID.(type) {
@@ -159,7 +153,6 @@ func (tc *TokoController) UpdateToko(c *fiber.Ctx) error {
 		userID = 0
 	}
 	if userID == 0 {
-		// try fallback keys
 		if v := c.Locals("userID"); v != nil {
 			switch val := v.(type) {
 			case uint:
@@ -190,28 +183,22 @@ func (tc *TokoController) UpdateToko(c *fiber.Ctx) error {
 		return utils.RespondJSON(c, fiber.StatusNotFound, false, "Failed to UPDATE data", []string{"Toko not found or unauthorized"}, nil)
 	}
 
-	// Parse multipart form (it may return error if no form; handle gracefully)
 	form, err := c.MultipartForm()
 	if err != nil && err != fiber.ErrUnprocessableEntity {
-		// if it's a real error, return; else if no multipart, form == nil is ok
 		return utils.RespondJSON(c, fiber.StatusBadRequest, false, "Invalid form data", []string{err.Error()}, nil)
 	}
 
-	// Update nama toko if provided
 	if nama := c.FormValue("nama_toko"); nama != "" {
 		toko.NamaToko = nama
 	}
 
-	// Update foto toko if provided
 	if form != nil {
 		files := form.File["photo"]
 		if len(files) > 0 {
 			file := files[0]
 
-			// Delete old photo (if any)
 			utils.DeleteFile(toko.UrlFoto)
 
-			// Save new photo
 			filename, err := utils.SaveFiberFile(file)
 			if err != nil {
 				return utils.RespondJSON(c, fiber.StatusInternalServerError, false, "Failed to upload file", []string{err.Error()}, nil)

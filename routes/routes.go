@@ -81,7 +81,6 @@ func SetupRoutes(app *fiber.App, db *gorm.DB) {
 	// PRODUCT (PUBLIC + PROTECTED)
 	// ========================
 
-	// Gunakan single group dengan middleware per-route
 	productGroup := api.Group("/product")
 	
 	// Public routes

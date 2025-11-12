@@ -7,10 +7,8 @@ import (
 )
 
 func GenerateSlug(text string) string {
-	// Normalize unicode (hilangkan accent: é → e, ü → u)
 	var normalized strings.Builder
 	for _, r := range strings.ToLower(text) {
-		// convert é -> e
 		if norm := removeAccent(r); norm != "" {
 			normalized.WriteString(norm)
 		}
@@ -18,13 +16,10 @@ func GenerateSlug(text string) string {
 
 	slug := normalized.String()
 
-	// Replace any whitespace or underscore with hyphen
 	slug = regexp.MustCompile(`[\s_]+`).ReplaceAllString(slug, "-")
 
-	// Keep only a-z, 0-9, and hyphen
 	slug = regexp.MustCompile(`[^a-z0-9-]`).ReplaceAllString(slug, "")
 
-	// Replace multiple hyphens with single
 	slug = regexp.MustCompile(`-+`).ReplaceAllString(slug, "-")
 
 	return strings.Trim(slug, "-")

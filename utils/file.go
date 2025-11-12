@@ -2,7 +2,7 @@ package utils
 
 import (
 	"fmt"
-	"io" // WAJIB! buat io.Copy
+	"io"
 	"mime/multipart"
 	"os"
 	"path/filepath"

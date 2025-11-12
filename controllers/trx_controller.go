@@ -120,7 +120,6 @@ func (tc *TrxController) CreateTrx(c *fiber.Ctx) error {
 
 	totalHarga := 0
 
-	// Process each detail
 	for _, detail := range req.DetailTrx {
 
 		var product models.Product
@@ -129,7 +128,6 @@ func (tc *TrxController) CreateTrx(c *fiber.Ctx) error {
 			return utils.FiberErrorCustom(c, fiber.StatusBadRequest, "Failed to POST data", "Product not found")
 		}
 
-		// Check stock
 		if product.Stok < detail.Kuantitas {
 			tx.Rollback()
 			return utils.FiberErrorCustom(c, fiber.StatusBadRequest, "Failed to POST data", "Insufficient stock")
@@ -152,7 +150,6 @@ func (tc *TrxController) CreateTrx(c *fiber.Ctx) error {
 			return utils.FiberError(c, "Failed to POST data", err)
 		}
 
-		// Calculate price: convert HargaKonsumen (string) -> int
 		hargaKonsumenInt, err := strconv.Atoi(product.HargaKonsumen)
 		if err != nil {
 			tx.Rollback()

@@ -17,7 +17,6 @@ const UserIDKey = "userID"
 func AuthMiddleware(db *gorm.DB) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 
-		// 1. Ambil token (dari header "token" atau "Authorization: Bearer <token>")
 		tokenString := c.Get("token")
 
 		if tokenString == "" {
@@ -31,7 +30,6 @@ func AuthMiddleware(db *gorm.DB) fiber.Handler {
 			return utils.RespondJSON(c, fiber.StatusUnauthorized, false, "Unauthorized", []string{"Token required"}, nil)
 		}
 
-		// 2. Parse token
 		token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 				return nil, fiber.NewError(fiber.StatusUnauthorized, "Invalid signing method")
@@ -43,13 +41,11 @@ func AuthMiddleware(db *gorm.DB) fiber.Handler {
 			return utils.RespondJSON(c, fiber.StatusUnauthorized, false, "Unauthorized", []string{"Invalid token"}, nil)
 		}
 
-		// 3. Ambil claims
 		claims, ok := token.Claims.(jwt.MapClaims)
 		if !ok {
 			return utils.RespondJSON(c, fiber.StatusUnauthorized, false, "Unauthorized", []string{"Cannot parse token claims"}, nil)
 		}
 
-		// 4. Ambil user ID dari claim (harapkan ada key "id" yang bertipe number)
 		idValue, ok := claims["id"]
 		if !ok {
 			return utils.RespondJSON(c, fiber.StatusUnauthorized, false, "Unauthorized", []string{"ID not found in token"}, nil)
@@ -57,19 +53,17 @@ func AuthMiddleware(db *gorm.DB) fiber.Handler {
 
 		userIDFloat, ok := idValue.(float64)
 		if !ok {
-			// sometimes id might be string in token; try string -> int
 			if _, ok2 := idValue.(string); ok2 {
-				// avoid importing strconv here; keep middleware simple
 				return utils.RespondJSON(c, fiber.StatusUnauthorized, false, "Unauthorized", []string{"Invalid ID format in token (string) - expected number"}, nil)
 			}
 			return utils.RespondJSON(c, fiber.StatusUnauthorized, false, "Unauthorized", []string{"Invalid ID format"}, nil)
 		}
 
 		uid := uint(userIDFloat)
-		c.Locals(UserIDKey, uid)    // main key used across project
-		c.Locals("userID", uid)     // explicit
-		c.Locals("user_id", uid)    // snake_case
-		c.Locals("id", uid)         // older controllers might expect "id"
+		c.Locals(UserIDKey, uid)    
+		c.Locals("userID", uid)     
+		c.Locals("user_id", uid)    
+		c.Locals("id", uid)         
 
 		return c.Next()
 	}

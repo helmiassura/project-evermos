@@ -64,7 +64,6 @@ func (uc *UserController) UpdateProfile(c *fiber.Ctx) error {
 		return utils.RespondJSON(c, fiber.StatusNotFound, false, "Failed to UPDATE data", []string{"User not found"}, nil)
 	}
 
-	// Parse tanggal lahir (string -> *time.Time)
 	var tPtr *time.Time
 	if req.TanggalLahir != "" {
 		t, err := time.Parse("2006-01-02", req.TanggalLahir) // ubah layout jika format berbeda
@@ -81,7 +80,7 @@ func (uc *UserController) UpdateProfile(c *fiber.Ctx) error {
 	if req.NoTelp != "" {
 		user.NoTelp = req.NoTelp
 	}
-	user.TanggalLahir = tPtr // nil jika kosong
+	user.TanggalLahir = tPtr
 	if req.Pekerjaan != "" {
 		user.Pekerjaan = req.Pekerjaan
 	}
