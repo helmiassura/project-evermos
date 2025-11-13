@@ -365,7 +365,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \"nama_category\": \"Makanan\" }"
+							"raw": "{ \"nama_category\": \"Category Updated\" }"
 						},
 						"url": {
 							"raw": "{{base_url}}/category/1",
@@ -481,7 +481,7 @@
 							"formdata": [
 								{
 									"key": "nama_toko",
-									"value": "Toko Helmi",
+									"value": "Toko Helmi Updated",
 									"type": "text"
 								}
 							]
